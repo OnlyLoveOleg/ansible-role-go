@@ -11,7 +11,7 @@
   when: ansible_distribution_release not in ['trusty']
 
 - name: Extract the Version from Download URL
-  command: echo {{ go_inst.src_file_url | basename | regex_replace('^go(.*).linux-amd64.tar.gz$', '\\1')}}
+  command: "echo {{ go_inst.src_file_url | basename | regex_replace('^go(.*).linux-amd64.tar.gz$', '\\1') }}"
   register: version
   changed_when: false
 
