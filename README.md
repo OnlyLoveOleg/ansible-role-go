@@ -10,10 +10,9 @@ Role Variables
 defaults/main.yml:
 
 ```
----
 go_inst:
- src_file_url: "https://storage.googleapis.com/golang/go1.6.2.linux-amd64.tar.gz"
- src_file_sha256: e40c36ae71756198478624ed1bb4ce17597b3c19d243f3f0899bb5740d56212a
+ src_file_url: https://storage.googleapis.com/golang/go1.7.linux-amd64.tar.gz
+ src_file_sha256: 702ad90f705365227e902b42d91dd1a40e48ca7f67a2f4b2fd052aaa4295cd95
 ```
 
 

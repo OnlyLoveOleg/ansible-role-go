@@ -1,21 +1,44 @@
 ---
-- name: Check for supported operating system on target
-  fail:
-    msg: "The operating system of the target machine ({{ inventory_hostname }}) is not currently supported."
-  when: ( ansible_os_family != "Debian" ) and
-        ( ansible_os_family != "RedHat" )
+# https://github.com/ansible/ansible/issues/2769
+- name: print download URL
+  debug: >
+    msg="Download URL: {{ go_inst.src_file_url }}"
 
 
-- name: Extract the Version from Download URL
-  command: "echo {{ go_inst.src_file_url | basename | regex_replace('^go(.*).linux-amd64.tar.gz$', '\\1') }}"
-  register: version
-  changed_when: false
+- name: create /usr/local/src/go directory
+  file:
+   path=/usr/local/src/go/
+   state=directory
+   owner=root
+   group=root
+   mode=0755
 
 
-- name: Print Version
-  debug:
-   msg="Got Version from URL {{ version.stdout }}"
+- name: download Go src file
+  get_url:
+   url={{ go_inst.src_file_url }}
+   dest=/usr/local/src/go/{{ go_inst.src_file_url | basename }}
+   sha256sum={{ go_inst.src_file_sha256 }}
+  register: go_src_file
 
 
-- name: Include distro specific tasks
-  include: "{{ ansible_os_family }}.yml"
+- block:
+  - name: clean old version
+    file:
+     path=/usr/local/go
+     state=absent
+
+
+  - name: extract the src Go file
+    unarchive:
+     src=/usr/local/src/go/{{ go_inst.src_file_url | basename }}
+     dest=/usr/local
+     copy=no
+
+  when: go_src_file|changed
+
+
+- name: add /usr/local/go/bin to the PATH system wide
+  lineinfile:
+   dest=/etc/profile
+   line="export PATH=$PATH:/usr/local/go/bin"
