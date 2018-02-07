@@ -11,8 +11,8 @@ defaults/main.yml:
 
 ```
 go_inst:
- src_file_url: https://storage.googleapis.com/golang/go1.7.linux-amd64.tar.gz
- src_file_sha256: 702ad90f705365227e902b42d91dd1a40e48ca7f67a2f4b2fd052aaa4295cd95
+ src_file_url: https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz
+ src_file_sha256: a4da5f4c07dfda8194c4621611aeb7ceaab98af0b38bfb29e1be2ebb04c3556c
 ```
 
 
@@ -31,4 +31,4 @@ Author Information
 
 Tal Lannder
 
-tal@pjili.org
+tal@tal.fyi

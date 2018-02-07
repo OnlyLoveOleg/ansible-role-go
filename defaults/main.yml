@@ -1,4 +1,4 @@
 ---
 go_inst:
- src_file_url: https://storage.googleapis.com/golang/go1.7.5.linux-amd64.tar.gz
- src_file_sha256: 2e4dd6c44f0693bef4e7b46cc701513d74c3cc44f2419bf519d7868b12931ac3
+ src_file_url: https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz
+ src_file_sha256: a4da5f4c07dfda8194c4621611aeb7ceaab98af0b38bfb29e1be2ebb04c3556c
