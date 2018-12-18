@@ -1,4 +1,4 @@
 ---
 go_inst:
- src_file_url: https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz
- src_file_sha256: a4da5f4c07dfda8194c4621611aeb7ceaab98af0b38bfb29e1be2ebb04c3556c
+ src_file_url: https://dl.google.com/go/go1.11.4.linux-amd64.tar.gz
+ src_file_sha256: fb26c30e6a04ad937bbc657a1b5bba92f80096af1e8ee6da6430c045a8db3a5b 
