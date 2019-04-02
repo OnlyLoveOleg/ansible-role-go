@@ -35,7 +35,7 @@
      dest=/usr/local
      copy=no
 
-  when: go_src_file|changed
+  when: go_src_file is changed
 
 
 - name: add /usr/local/go/bin to the PATH system wide
