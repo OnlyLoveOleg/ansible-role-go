@@ -4,15 +4,10 @@
   debug: >
     msg="Download URL: {{ go_inst.src_file_url }}"
 
-
-- name: create /usr/local/src/go directory
-  file:
-   path=/usr/local/src/go/
-   state=directory
-   owner=root
-   group=root
-   mode=0755
-
+- name: stat /usr/local/go
+  stat:
+    path: /usr/local/go
+  register: go_installation_dir
 
 - name: download Go src file
   get_url:
@@ -21,13 +16,19 @@
    sha256sum={{ go_inst.src_file_sha256 }}
   register: go_src_file
 
-
 - block:
+  - name: create /usr/local/src/go directory
+    file:
+     path=/usr/local/src/go/
+     state=directory
+     owner=root
+     group=root
+     mode=0755
+
   - name: clean old version
     file:
      path=/usr/local/go
      state=absent
-
 
   - name: extract the src Go file
     unarchive:
@@ -35,7 +36,7 @@
      dest=/usr/local
      copy=no
 
-  when: go_src_file is changed
+  when: go_src_file is changed or not go_installation_dir.stat.exists
 
 
 - name: add /usr/local/go/bin to the PATH system wide
